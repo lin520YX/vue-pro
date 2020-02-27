@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        {{name}}
+    </div>
+    <script src='./node_modules/vue/dist/vue.js'></script>
+    <script>
+        let vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    name: 1111,
+                    tmp: '<h1>1111</h1>',
+                    isShow:false
+                }
+            },
+            watch: {
+                name:{
+                    handler(newValue){
+                        console.log(newValue)
+                    },
+                    immediate:true,
+                    deep:true
+                }
+            },
+        })
+        // function initWatch(watch){
+        //     for(let key of watch){
+        //         vm.$watch(key,watch[key])
+        //     }
+        // }
+        // initWatch({
+        //     name:(newValue)=>{
+        //         console.log(newValue)
+        //     }
+        // })
+        //     let dirty = true;
+        // function initComputed(key,handler){
+        //     let value;
+        //     Object.defineProperty(vm,key,{
+        //         get(){
+        //             if(dirty){
+        //                 value = handler();
+        //                 dirty = false;
+        //             }
+        //             return value
+        //         }
+        //     })
+        // }
+        // initComputed('name',()=>{
+        //     return vm.name+'1111'
+        // })
+
+        // watch 每次值变化都能够调用相应的回调
+        // computed 计算属性，多次取值是有缓存效果的 如果以来的值变化了 会重新执行
+    </script>
+</body>
+
+</html>
