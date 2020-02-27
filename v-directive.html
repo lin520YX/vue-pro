@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <div v-click-outside>
+                <input type="text" v-focus='name'>
+                <div class="content" v-show='isShow'>
+                    <button>dianwo</button>
+                </div>
+        </div>
+    </div>
+    <script src='./node_modules/vue/dist/vue.js'></script>
+    <script>
+        // Vue.directive('focus', {
+        //     inserted(el, bindings, vnode) {
+        //         el.focus();
+        //     },
+        //     bind(el, bindings, vnode){},
+        //     update(el, bindings, vnode){}
+        // })
+        let vm = new Vue({
+            el: '#root',
+            directives:{
+                clickOutside:{
+                    bind(el,bindings,vnode){
+                        el.fn=(e)=>{
+                            if(el.contains(e.target)){
+                                vnode.context['focus']()
+                            }else{
+                                vnode.context['bind']()
+                            }
+                        }
+                        document.addEventListener('click',el.fn)
+                    },
+                    unbind(el){
+                        document.removeEventListener('click',el.fn)
+                    }
+                }
+            },
+            data() {
+                return {
+                    name: 1111,
+                    tmp: '<h1>1111</h1>',
+                    isShow:false
+                }
+            },
+            methods: {
+                focus(){
+                    this.isShow = true;
+                },
+                blur(){
+                    this.isShow = false;
+                }
+            },
+        })
+
+        // 指令的功能 封装dom 操作template 不能和 v-show一起用
+    </script>
+</body>
+
+</html>
