@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .content {
+        height: 100px;
+        background: red;
+        width: 100px;
+    }
+
+    .fade-enter {
+        background: black;
+        opacity: 0;
+    }
+
+    .fade-enter-active{
+        background: blue;
+        transition: all 10s linear;
+        transition: opacity .5s;
+    }
+
+    .fade-enter-to {
+        background: red;
+
+    }
+
+ 
+
+    .fade-leave-active {
+        background: yellow;
+        transition: all 10s linear;
+        transition: opacity .5s;
+    }
+    .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+</style>
+
+<body>
+    <script src='./node_modules/vue/dist/vue.min.js'></script>
+    <div id="root">
+        <button v-on:click="isShow = !isShow">dian</button>
+        <transition name="fade">
+                <p v-if="isShow">hello</p>
+              </transition>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#root',
+            data: {
+                isShow: false
+            },
+        })
+    </script>
+</body>
+
+</html>
