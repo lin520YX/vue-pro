@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul li {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        li img {
+            width: 150px;
+            height: 80px;
+        }
+
+        .cart {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 150px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: chartreuse;
+        }
+
+        .animate {
+            position: absolute;
+            width: 150px;
+            height: 80px;
+            display: block;
+            transition:all 1s linear ;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+       <my :she='she'></my>
+    </div>
+
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 单向数据流
+       let component={
+           template:'<div>{{she}}</div>',
+           props:{
+            she:Number
+           },
+           data(){
+               return{
+                   m:1
+               }
+           }
+       }
+    //    全局
+    // Vue.component(component)
+
+        let vm = new Vue({
+            el: '#app',
+            data(){
+               return{she:100} 
+            },
+            components:{
+                my:component
+            },
+            beforeCreate() {
+                // 基本上业务逻辑不需要
+            },
+            created() {
+                // 无法获取真实的dom 这个阶段挂在数据劫持
+                // 方法计算属性 挂载到实例
+                // ajax创建完成
+            },
+            beforeMount() {
+                // 调用 render 方法
+                // 一般不会增加业务逻辑
+                console.log('g')
+            },
+            mounted() {
+                // 当前组件挂载完成
+                // 可以拿到真实dom
+                console.log('gg')
+            },
+            beforeUpdate() {
+                // 增加一些数据更新视图多次刷新
+            },
+            updated() {
+                // 不要再去更新数据 可能会死循环
+            },
+            beforeDestroy() {
+                // 手动移除组件，移除监听事件
+            },
+            destroyed() {
+                
+            },
+            
+        })
+    </script>
+</body>
+
+</html>
